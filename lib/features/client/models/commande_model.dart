@@ -1,4 +1,4 @@
-import '../../../core/utils/enums.dart';
+/* import '../../../core/utils/enums.dart';
 import '../../auth/models/user_model.dart';
 import '../../proprietaire/models/vehicule_model.dart';
 
@@ -153,4 +153,4 @@ class CreateCommandeRequest {
       if (dateLivraisonSouhaitee != null) 'dateLivraisonSouhaitee': dateLivraisonSouhaitee!.toIso8601String(),
     };
   }
-}
+} */

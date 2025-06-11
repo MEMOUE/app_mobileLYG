@@ -1,4 +1,4 @@
-import 'package:geolocator/geolocator.dart';
+/* import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:permission_handler.dart';
 
@@ -51,3 +51,4 @@ class LocationService {
     return Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000; // en km
   }
 }
+ */

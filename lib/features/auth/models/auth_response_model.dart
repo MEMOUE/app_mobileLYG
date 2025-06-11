@@ -1,4 +1,4 @@
-import 'user_model.dart';
+/* import 'user_model.dart';
 
 class AuthResponse {
   final String token;
@@ -21,4 +21,4 @@ class AuthResponse {
       expiresIn: json['expiresIn'],
     );
   }
-}
+} */

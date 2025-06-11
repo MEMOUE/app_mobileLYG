@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import '../../../core/utils/enums.dart';
 import '../widgets/user_type_card.dart';
 import 'register_screen.dart';
@@ -99,4 +99,4 @@ class UserTypeSelectionScreen extends StatelessWidget {
       ),
     );
   }
-}
+} */

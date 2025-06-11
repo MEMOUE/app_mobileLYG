@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/proprietaire_provider.dart';
 
@@ -188,3 +188,4 @@ class _StatCard extends StatelessWidget {
     );
   }
 }
+ */

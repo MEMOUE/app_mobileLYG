@@ -1,4 +1,4 @@
-import '../../../core/utils/enums.dart';
+/* import '../../../core/utils/enums.dart';
 import '../../auth/models/user_model.dart';
 
 class VehiculeModel {
@@ -128,4 +128,4 @@ class CreateVehiculeRequest {
       if (numeroCarteGrise != null) 'numeroCarteGrise': numeroCarteGrise,
     };
   }
-}
+} */

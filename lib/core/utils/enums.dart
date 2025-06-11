@@ -1,4 +1,4 @@
-enum TypeUtilisateur {
+/* enum TypeUtilisateur {
   CLIENT,
   CHAUFFEUR,
   PROPRIETAIRE_VEHICULE,
@@ -121,3 +121,4 @@ extension TypeVehiculeExtension on TypeVehicule {
     }
   }
 }
+ */
