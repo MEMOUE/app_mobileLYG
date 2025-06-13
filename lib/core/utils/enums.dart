@@ -1,4 +1,7 @@
-/* enum TypeUtilisateur {
+import 'package:flutter/material.dart';
+import '../constants/app_colors.dart';
+
+enum TypeUtilisateur {
   CLIENT,
   CHAUFFEUR,
   PROPRIETAIRE_VEHICULE,
@@ -22,6 +25,52 @@ enum TypeVehicule {
   CAMION_LOURD,
   CAMION_FRIGORIFIQUE,
   CAMION_BENNE,
+}
+
+extension TypeUtilisateurExtension on TypeUtilisateur {
+  String get libelle {
+    switch (this) {
+      case TypeUtilisateur.CLIENT:
+        return 'Client';
+      case TypeUtilisateur.CHAUFFEUR:
+        return 'Chauffeur';
+      case TypeUtilisateur.PROPRIETAIRE_VEHICULE:
+        return 'Propriétaire de véhicule';
+    }
+  }
+  
+  String get description {
+    switch (this) {
+      case TypeUtilisateur.CLIENT:
+        return 'Je veux faire transporter mes marchandises';
+      case TypeUtilisateur.CHAUFFEUR:
+        return 'Je veux transporter des marchandises';
+      case TypeUtilisateur.PROPRIETAIRE_VEHICULE:
+        return 'Je gère une flotte de véhicules';
+    }
+  }
+  
+  IconData get icon {
+    switch (this) {
+      case TypeUtilisateur.CLIENT:
+        return Icons.person;
+      case TypeUtilisateur.CHAUFFEUR:
+        return Icons.local_shipping;
+      case TypeUtilisateur.PROPRIETAIRE_VEHICULE:
+        return Icons.business;
+    }
+  }
+  
+  Color get color {
+    switch (this) {
+      case TypeUtilisateur.CLIENT:
+        return AppColors.info;
+      case TypeUtilisateur.CHAUFFEUR:
+        return AppColors.success;
+      case TypeUtilisateur.PROPRIETAIRE_VEHICULE:
+        return AppColors.warning;
+    }
+  }
 }
 
 extension StatutCommandeExtension on StatutCommande {
@@ -49,21 +98,21 @@ extension StatutCommandeExtension on StatutCommande {
   Color get color {
     switch (this) {
       case StatutCommande.EN_ATTENTE:
-        return Colors.orange;
+        return AppColors.statusPending;
       case StatutCommande.ACCEPTEE:
-        return Colors.blue;
+        return AppColors.statusAccepted;
       case StatutCommande.EN_COURS:
-        return Colors.purple;
+        return AppColors.statusInProgress;
       case StatutCommande.RAMASSAGE:
-        return Colors.indigo;
+        return AppColors.statusPickup;
       case StatutCommande.EN_LIVRAISON:
-        return Colors.amber;
+        return AppColors.statusDelivery;
       case StatutCommande.LIVREE:
-        return Colors.green;
+        return AppColors.statusDelivered;
       case StatutCommande.ANNULEE:
-        return Colors.red;
+        return AppColors.statusCancelled;
       case StatutCommande.REFUSEE:
-        return Colors.grey;
+        return AppColors.statusRefused;
     }
   }
 
@@ -121,4 +170,3 @@ extension TypeVehiculeExtension on TypeVehicule {
     }
   }
 }
- */

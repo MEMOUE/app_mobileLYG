@@ -1,4 +1,4 @@
-/* import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import '../../../core/services/auth_service.dart';
 import '../../../core/utils/enums.dart';
 import '../models/user_model.dart';
@@ -18,10 +18,23 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> _checkAuthStatus() async {
-    final user = await AuthService.getStoredUser();
-    if (user != null) {
-      _currentUser = user;
-      notifyListeners();
+    _setLoading(true);
+    try {
+      final user = await AuthService.getStoredUser();
+      if (user != null) {
+        // Vérifier si le token est toujours valide
+        final isValid = await AuthService.isTokenValid();
+        if (isValid) {
+          _currentUser = user;
+        } else {
+          // Token expiré, déconnecter l'utilisateur
+          await logout();
+        }
+      }
+    } catch (e) {
+      debugPrint('Erreur lors de la vérification du statut d\'authentification: $e');
+    } finally {
+      _setLoading(false);
     }
   }
 
@@ -35,7 +48,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      _error = e.toString();
+      _error = e.toString().replaceFirst('Exception: ', '');
       notifyListeners();
       return false;
     } finally {
@@ -79,7 +92,7 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      _error = e.toString();
+      _error = e.toString().replaceFirst('Exception: ', '');
       notifyListeners();
       return false;
     } finally {
@@ -90,6 +103,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> logout() async {
     await AuthService.logout();
     _currentUser = null;
+    _clearError();
     notifyListeners();
   }
 
@@ -100,7 +114,19 @@ class AuthProvider extends ChangeNotifier {
 
   void _clearError() {
     _error = null;
+  }
+
+  void clearError() {
+    _clearError();
     notifyListeners();
   }
+
+  // Méthode pour rafraîchir les données utilisateur
+  Future<void> refreshUser() async {
+    final user = await AuthService.getStoredUser();
+    if (user != null) {
+      _currentUser = user;
+      notifyListeners();
+    }
+  }
 }
- */

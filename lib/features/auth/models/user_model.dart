@@ -1,4 +1,4 @@
-/* import '../../../core/utils/enums.dart';
+import '../../../core/utils/enums.dart';
 
 class UserModel {
   final int id;
@@ -92,4 +92,4 @@ class UserModel {
       'numeroSiret': numeroSiret,
     };
   }
-} */
+}
