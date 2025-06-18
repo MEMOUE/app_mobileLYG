@@ -1,10 +1,11 @@
-/* import 'dart:convert';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/constants/api_constants.dart';
 import '../../../core/services/auth_service.dart';
 import '../models/vehicule_model.dart';
 import '../../client/models/commande_model.dart';
+import '../../../core/utils/enums.dart';
 
 class ProprietaireProvider extends ChangeNotifier {
   List<VehiculeModel> _vehicules = [];
@@ -116,4 +117,9 @@ class ProprietaireProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
   }
-} */
+
+  void clearError() {
+    _clearError();
+    notifyListeners();
+  }
+}

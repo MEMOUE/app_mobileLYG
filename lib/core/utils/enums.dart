@@ -117,21 +117,33 @@ extension StatutCommandeExtension on StatutCommande {
   }
 
   bool get isActive {
-    return [
-      StatutCommande.EN_ATTENTE,
-      StatutCommande.ACCEPTEE,
-      StatutCommande.EN_COURS,
-      StatutCommande.RAMASSAGE,
-      StatutCommande.EN_LIVRAISON,
-    ].contains(this);
+    switch (this) {
+      case StatutCommande.EN_ATTENTE:
+      case StatutCommande.ACCEPTEE:
+      case StatutCommande.EN_COURS:
+      case StatutCommande.RAMASSAGE:
+      case StatutCommande.EN_LIVRAISON:
+        return true;
+      case StatutCommande.LIVREE:
+      case StatutCommande.ANNULEE:
+      case StatutCommande.REFUSEE:
+        return false;
+    }
   }
 
   bool get isFinished {
-    return [
-      StatutCommande.LIVREE,
-      StatutCommande.ANNULEE,
-      StatutCommande.REFUSEE,
-    ].contains(this);
+    switch (this) {
+      case StatutCommande.LIVREE:
+      case StatutCommande.ANNULEE:
+      case StatutCommande.REFUSEE:
+        return true;
+      case StatutCommande.EN_ATTENTE:
+      case StatutCommande.ACCEPTEE:
+      case StatutCommande.EN_COURS:
+      case StatutCommande.RAMASSAGE:
+      case StatutCommande.EN_LIVRAISON:
+        return false;
+    }
   }
 }
 
@@ -167,6 +179,40 @@ extension TypeVehiculeExtension on TypeVehicule {
         return Icons.ac_unit;
       case TypeVehicule.CAMION_BENNE:
         return Icons.engineering;
+    }
+  }
+
+  double get capaciteMaxPoids {
+    switch (this) {
+      case TypeVehicule.CAMIONNETTE:
+        return 3.5;
+      case TypeVehicule.CAMION_LEGER:
+        return 7.5;
+      case TypeVehicule.CAMION_MOYEN:
+        return 19.0;
+      case TypeVehicule.CAMION_LOURD:
+        return 40.0;
+      case TypeVehicule.CAMION_FRIGORIFIQUE:
+        return 19.0;
+      case TypeVehicule.CAMION_BENNE:
+        return 30.0;
+    }
+  }
+
+  double get capaciteMaxVolume {
+    switch (this) {
+      case TypeVehicule.CAMIONNETTE:
+        return 15.0;
+      case TypeVehicule.CAMION_LEGER:
+        return 25.0;
+      case TypeVehicule.CAMION_MOYEN:
+        return 40.0;
+      case TypeVehicule.CAMION_LOURD:
+        return 80.0;
+      case TypeVehicule.CAMION_FRIGORIFIQUE:
+        return 45.0;
+      case TypeVehicule.CAMION_BENNE:
+        return 35.0;
     }
   }
 }

@@ -1,4 +1,4 @@
-/* import '../../../core/utils/enums.dart';
+import '../../../core/utils/enums.dart';
 import '../../auth/models/user_model.dart';
 import '../../proprietaire/models/vehicule_model.dart';
 
@@ -75,16 +75,16 @@ class CommandeModel {
       client: json['client'] != null ? UserModel.fromJson(json['client']) : null,
       chauffeur: json['chauffeur'] != null ? UserModel.fromJson(json['chauffeur']) : null,
       vehicule: json['vehicule'] != null ? VehiculeModel.fromJson(json['vehicule']) : null,
-      latitudeDepart: json['latitudeDepart'].toDouble(),
-      longitudeDepart: json['longitudeDepart'].toDouble(),
+      latitudeDepart: (json['latitudeDepart'] as num).toDouble(),
+      longitudeDepart: (json['longitudeDepart'] as num).toDouble(),
       adresseDepart: json['adresseDepart'],
-      latitudeArrivee: json['latitudeArrivee'].toDouble(),
-      longitudeArrivee: json['longitudeArrivee'].toDouble(),
+      latitudeArrivee: (json['latitudeArrivee'] as num).toDouble(),
+      longitudeArrivee: (json['longitudeArrivee'] as num).toDouble(),
       adresseArrivee: json['adresseArrivee'],
-      poidsMarchandise: json['poidsMarchandise'].toDouble(),
+      poidsMarchandise: (json['poidsMarchandise'] as num).toDouble(),
       volumeMarchandise: json['volumeMarchandise']?.toDouble(),
       descriptionMarchandise: json['descriptionMarchandise'],
-      urgent: json['urgent'],
+      urgent: json['urgent'] ?? false,
       dateCreation: DateTime.parse(json['dateCreation']),
       dateRamassageSouhaitee: json['dateRamassageSouhaitee'] != null 
           ? DateTime.parse(json['dateRamassageSouhaitee']) : null,
@@ -94,17 +94,51 @@ class CommandeModel {
           ? DateTime.parse(json['dateLivraisonSouhaitee']) : null,
       dateLivraisonEffective: json['dateLivraisonEffective'] != null 
           ? DateTime.parse(json['dateLivraisonEffective']) : null,
-      distance: json['distance'].toDouble(),
-      tarifCalcule: json['tarifCalcule'].toDouble(),
+      distance: (json['distance'] as num).toDouble(),
+      tarifCalcule: (json['tarifCalcule'] as num).toDouble(),
       tarifFinal: json['tarifFinal']?.toDouble(),
       statut: StatutCommande.values.firstWhere(
         (e) => e.name == json['statut'],
+        orElse: () => StatutCommande.EN_ATTENTE,
       ),
       noteClient: json['noteClient']?.toDouble(),
       noteChauffeur: json['noteChauffeur']?.toDouble(),
       commentaireClient: json['commentaireClient'],
       commentaireChauffeur: json['commentaireChauffeur'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'numeroCommande': numeroCommande,
+      'client': client?.toJson(),
+      'chauffeur': chauffeur?.toJson(),
+      'vehicule': vehicule?.toJson(),
+      'latitudeDepart': latitudeDepart,
+      'longitudeDepart': longitudeDepart,
+      'adresseDepart': adresseDepart,
+      'latitudeArrivee': latitudeArrivee,
+      'longitudeArrivee': longitudeArrivee,
+      'adresseArrivee': adresseArrivee,
+      'poidsMarchandise': poidsMarchandise,
+      'volumeMarchandise': volumeMarchandise,
+      'descriptionMarchandise': descriptionMarchandise,
+      'urgent': urgent,
+      'dateCreation': dateCreation.toIso8601String(),
+      'dateRamassageSouhaitee': dateRamassageSouhaitee?.toIso8601String(),
+      'dateRamassageEffective': dateRamassageEffective?.toIso8601String(),
+      'dateLivraisonSouhaitee': dateLivraisonSouhaitee?.toIso8601String(),
+      'dateLivraisonEffective': dateLivraisonEffective?.toIso8601String(),
+      'distance': distance,
+      'tarifCalcule': tarifCalcule,
+      'tarifFinal': tarifFinal,
+      'statut': statut.name,
+      'noteClient': noteClient,
+      'noteChauffeur': noteChauffeur,
+      'commentaireClient': commentaireClient,
+      'commentaireChauffeur': commentaireChauffeur,
+    };
   }
 }
 
@@ -153,4 +187,4 @@ class CreateCommandeRequest {
       if (dateLivraisonSouhaitee != null) 'dateLivraisonSouhaitee': dateLivraisonSouhaitee!.toIso8601String(),
     };
   }
-} */
+}

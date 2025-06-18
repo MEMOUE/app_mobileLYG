@@ -1,4 +1,4 @@
-/* import '../../../core/utils/enums.dart';
+import '../../../core/utils/enums.dart';
 import '../../auth/models/user_model.dart';
 
 class VehiculeModel {
@@ -41,12 +41,13 @@ class VehiculeModel {
       marque: json['marque'],
       modele: json['modele'],
       annee: json['annee'],
-      capacitePoids: json['capacitePoids'].toDouble(),
-      capaciteVolume: json['capaciteVolume'].toDouble(),
+      capacitePoids: (json['capacitePoids'] as num).toDouble(),
+      capaciteVolume: (json['capaciteVolume'] as num).toDouble(),
       typeVehicule: TypeVehicule.values.firstWhere(
         (e) => e.name == json['typeVehicule'],
+        orElse: () => TypeVehicule.CAMIONNETTE,
       ),
-      disponible: json['disponible'],
+      disponible: json['disponible'] ?? true,
       latitudeActuelle: json['latitudeActuelle']?.toDouble(),
       longitudeActuelle: json['longitudeActuelle']?.toDouble(),
       dateCreation: DateTime.parse(json['dateCreation']),
@@ -55,6 +56,25 @@ class VehiculeModel {
           ? UserModel.fromJson(json['proprietaire']) 
           : null,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'immatriculation': immatriculation,
+      'marque': marque,
+      'modele': modele,
+      'annee': annee,
+      'capacitePoids': capacitePoids,
+      'capaciteVolume': capaciteVolume,
+      'typeVehicule': typeVehicule.name,
+      'disponible': disponible,
+      'latitudeActuelle': latitudeActuelle,
+      'longitudeActuelle': longitudeActuelle,
+      'dateCreation': dateCreation.toIso8601String(),
+      'photoUrl': photoUrl,
+      'proprietaire': proprietaire?.toJson(),
+    };
   }
 
   VehiculeModel copyWith({
@@ -128,4 +148,4 @@ class CreateVehiculeRequest {
       if (numeroCarteGrise != null) 'numeroCarteGrise': numeroCarteGrise,
     };
   }
-} */
+}
