@@ -1,6 +1,6 @@
 class AppStrings {
   static const String appName = 'LanaYaGo';
-  static const String appSlogan = 'Votre slogan ici';
+  static const String appSlogan = 'Technologie de transport intelligente';
   static const String loading = 'Chargement...';
   static const String chooseProfile = 'Choisissez votre profil';
 
