@@ -1,6 +1,7 @@
-/* import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import '../models/commande_model.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/enums.dart';
 
 class CommandeCard extends StatelessWidget {
   final CommandeModel commande;
@@ -162,4 +163,3 @@ class CommandeCard extends StatelessWidget {
     );
   }
 }
- */

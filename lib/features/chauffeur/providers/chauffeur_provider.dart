@@ -1,9 +1,8 @@
-/* import 'dart:convert';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../../../core/constants/api_constants.dart';
 import '../../../core/services/auth_service.dart';
-import '../../../core/services/location_service.dart';
 import '../../client/models/commande_model.dart';
 
 class ChauffeurProvider extends ChangeNotifier {
@@ -30,12 +29,13 @@ class ChauffeurProvider extends ChangeNotifier {
 
   Future<void> goOnline() async {
     try {
-      final position = await LocationService.getCurrentPosition();
-      if (position != null) {
-        await _updatePosition(position.latitude, position.longitude);
+      // TODO: Uncomment when location service is ready
+      // final position = await LocationService.getCurrentPosition();
+      // if (position != null) {
+      //   await _updatePosition(position.latitude, position.longitude);
         _isOnline = true;
         notifyListeners();
-      }
+      // }
     } catch (e) {
       _error = 'Impossible de se mettre en ligne: $e';
       notifyListeners();
@@ -114,5 +114,9 @@ class ChauffeurProvider extends ChangeNotifier {
     _error = null;
     notifyListeners();
   }
+
+  void clearError() {
+    _clearError();
+    notifyListeners();
+  }
 }
- */
