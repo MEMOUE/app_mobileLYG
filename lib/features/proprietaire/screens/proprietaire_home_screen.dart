@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../auth/providers/auth_provider.dart';
 import '../../shared/screens/profile_screen.dart';
+import 'add_vehicule_screen.dart';
 
 class ProprietaireHomeScreen extends StatefulWidget {
   const ProprietaireHomeScreen({super.key});
@@ -57,6 +58,21 @@ class _ProprietaireHomeScreenState extends State<ProprietaireHomeScreen> {
           ),
         ],
       ),
+      floatingActionButton: _currentIndex == 0 || _currentIndex == 1 
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AddVehiculeScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.add),
+              label: const Text('Ajouter véhicule'),
+              backgroundColor: AppColors.warning,
+            )
+          : null,
     );
   }
 }
@@ -146,19 +162,6 @@ class ProprietaireDashboard extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Ajouter un véhicule - Fonctionnalité à venir'),
-              backgroundColor: AppColors.success,
-            ),
-          );
-        },
-        icon: const Icon(Icons.add),
-        label: const Text('Ajouter véhicule'),
-        backgroundColor: AppColors.warning,
-      ),
     );
   }
 
@@ -234,7 +237,14 @@ class ProprietaireDashboard extends StatelessWidget {
                 icon: Icons.add_circle,
                 title: 'Ajouter\nvéhicule',
                 color: AppColors.success,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddVehiculeScreen(),
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(width: 12),
@@ -243,7 +253,13 @@ class ProprietaireDashboard extends StatelessWidget {
                 icon: Icons.person_add,
                 title: 'Nouveau\nchauffeur',
                 color: AppColors.info,
-                onTap: () {},
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Ajouter chauffeur - Fonctionnalité à venir'),
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(width: 12),
@@ -252,7 +268,13 @@ class ProprietaireDashboard extends StatelessWidget {
                 icon: Icons.analytics,
                 title: 'Rapports',
                 color: AppColors.primary,
-                onTap: () {},
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Rapports - Fonctionnalité à venir'),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -410,9 +432,16 @@ class ProprietaireDashboard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            TextButton(
-              onPressed: () {},
-              child: const Text('Gérer'),
+            TextButton.icon(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Gestion de la flotte - Fonctionnalité à venir'),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.manage_search),
+              label: const Text('Gérer'),
             ),
           ],
         ),
@@ -442,6 +471,23 @@ class ProprietaireDashboard extends StatelessWidget {
                       color: AppColors.textSecondary,
                     ),
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddVehiculeScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.add),
+                    label: const Text('Ajouter mon premier véhicule'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.warning,
+                      foregroundColor: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -572,6 +618,19 @@ class ProprietaireVehicules extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.warning,
         foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddVehiculeScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: const Center(
         child: Column(
