@@ -4,9 +4,6 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/enums.dart';
 import 'register_screen.dart';
 
-// TODO: Replace this with the actual import if UserTypeCard exists elsewhere
-// import 'package:your_project_path/widgets/user_type_card.dart';
-
 // Temporary UserTypeCard widget definition for demonstration
 class UserTypeCard extends StatelessWidget {
   final IconData icon;
