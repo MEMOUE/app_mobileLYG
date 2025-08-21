@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/enums.dart'; // Assurez-vous que cette ligne est présente
 import '../../auth/providers/auth_provider.dart';
 import '../../auth/screens/login_screen.dart';
 
@@ -74,6 +75,53 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildProfileHeader(BuildContext context, user) {
+    // Fonction pour obtenir la couleur selon le type d'utilisateur
+    Color getUserTypeColor(String typeUtilisateur) {
+      switch (typeUtilisateur) {
+        case 'CLIENT':
+          return AppColors.info;
+        case 'CHAUFFEUR':
+          return AppColors.success;
+        case 'PROPRIETAIRE_VEHICULE':
+          return AppColors.warning;
+        default:
+          return AppColors.primary;
+      }
+    }
+
+    // Fonction pour obtenir l'icône selon le type d'utilisateur
+    IconData getUserTypeIcon(String typeUtilisateur) {
+      switch (typeUtilisateur) {
+        case 'CLIENT':
+          return Icons.person;
+        case 'CHAUFFEUR':
+          return Icons.local_shipping;
+        case 'PROPRIETAIRE_VEHICULE':
+          return Icons.business;
+        default:
+          return Icons.person;
+      }
+    }
+
+    // Fonction pour obtenir le libellé selon le type d'utilisateur
+    String getUserTypeLibelle(String typeUtilisateur) {
+      switch (typeUtilisateur) {
+        case 'CLIENT':
+          return 'Client';
+        case 'CHAUFFEUR':
+          return 'Chauffeur';
+        case 'PROPRIETAIRE_VEHICULE':
+          return 'Propriétaire de véhicule';
+        default:
+          return 'Utilisateur';
+      }
+    }
+
+    final typeUtilisateurString = user.typeUtilisateur.toString().split('.').last;
+    final color = getUserTypeColor(typeUtilisateurString);
+    final icon = getUserTypeIcon(typeUtilisateurString);
+    final libelle = getUserTypeLibelle(typeUtilisateurString);
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -81,7 +129,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundColor: user.typeUtilisateur.color.withOpacity(0.1),
+              backgroundColor: color.withOpacity(0.1),
               backgroundImage: user.photoUrl != null 
                   ? NetworkImage(user.photoUrl!)
                   : null,
@@ -91,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: user.typeUtilisateur.color,
+                        color: color,
                       ),
                     )
                   : null,
@@ -100,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 16),
             
             Text(
-              user.fullName,
+              '${user.prenom} ${user.nom}',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -111,23 +159,23 @@ class ProfileScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: user.typeUtilisateur.color.withOpacity(0.1),
+                color: color.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: user.typeUtilisateur.color),
+                border: Border.all(color: color),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    user.typeUtilisateur.icon,
+                    icon,
                     size: 16,
-                    color: user.typeUtilisateur.color,
+                    color: color,
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    user.typeUtilisateur.libelle,
+                    libelle,
                     style: TextStyle(
-                      color: user.typeUtilisateur.color,
+                      color: color,
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
                     ),
@@ -224,7 +272,9 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildSpecificInfo(BuildContext context, user) {
-    if (user.typeUtilisateur.name == 'CHAUFFEUR' && user.numeroPermis != null) {
+    final typeUtilisateurString = user.typeUtilisateur.toString().split('.').last;
+    
+    if (typeUtilisateurString == 'CHAUFFEUR' && user.numeroPermis != null) {
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -254,7 +304,7 @@ class ProfileScreen extends StatelessWidget {
       );
     }
     
-    if (user.typeUtilisateur.name == 'PROPRIETAIRE_VEHICULE') {
+    if (typeUtilisateurString == 'PROPRIETAIRE_VEHICULE') {
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(16),

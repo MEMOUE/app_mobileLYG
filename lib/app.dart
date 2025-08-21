@@ -3,6 +3,9 @@ import 'package:provider/provider.dart';
 import 'core/themes/app_theme.dart';
 import 'core/constants/app_strings.dart';
 import 'features/auth/providers/auth_provider.dart';
+import 'features/chauffeur/providers/chauffeur_provider.dart';
+import 'features/client/providers/commande_provider.dart';
+import 'features/proprietaire/providers/proprietaire_provider.dart';
 import 'features/shared/screens/splash_screen.dart';
 
 class LanaYaGoApp extends StatelessWidget {
@@ -15,7 +18,15 @@ class LanaYaGoApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AuthProvider(),
         ),
-        // Ajoutez d'autres providers ici au fur et à mesure
+        ChangeNotifierProvider(
+          create: (_) => ProprietaireProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ChauffeurProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CommandeProvider(),
+        ),
       ],
       child: MaterialApp(
         title: AppStrings.appName,
